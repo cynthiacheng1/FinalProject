@@ -5,4 +5,16 @@ public class Edge{
 		node = e;
 		length = l;
 	}
+	public double getlength(){
+		return length;
+	}
+	public int getnode(){
+		return node;
+	}
+	public void setsolved(){
+		length = Double.POSITIVE_INFINITY;
+	}
+	public String toString(){
+		return " TO " + node;
+	}
 }
