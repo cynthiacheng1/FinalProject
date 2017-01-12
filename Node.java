@@ -1,5 +1,5 @@
 import java.util.List;
-public class Node extends shortestpath{
+public class Node{
 	private String label;
 	private Edge[] adjEdges;
 	private double spdist;
@@ -12,7 +12,16 @@ public class Node extends shortestpath{
 		adjEdges = new Edge[adjE.length];
 		for (int i = 0; i < adjE.length; i++){
 			adjEdges[i] = new Edge((int)adjE[i][0], adjE[i][1]);
+			//System.out.println(adjEdges[i].getnode());
 		}
+	}
+
+	public boolean issolved(){
+		return solved;
+	}
+
+	public String getlabel(){
+		return label;
 	}
 
 	public void makesolved(){
@@ -20,25 +29,35 @@ public class Node extends shortestpath{
 	}
 
 	public void setSP(List<Node> sp){
-		spath = sp
+		spath = sp;
 	}
 
 	public void setSPD(double spd){
 		spdist = spd;
 	}
 
-	public double[] findclosestunsolved(){
+	public double[] findclosestunsolved(Node[] nodes){
 		//add case for when there are no adjEdges
-		if (!solved){return {-1, 0;}}
-		minl = Double.POSITIVE_INFINITY;
-	    iminlen = 0;
+		if (!issolved()){return new double[] {-1, 0};}
+		double minl = Double.POSITIVE_INFINITY;
+	    double node = 100;
 	    for (int i = 0; i < adjEdges.length; i++){
-	        if ((minl > adjEdges[i].length) && !(nodes[i].solved)){
-	            min = adjEdge[i].length;
-	            node = adjEdge[i].node;
+	        if ((minl > adjEdges[i].getlength()) && !(nodes[adjEdges[i].getnode()].issolved())){
+	            minl = adjEdges[i].getlength();
+	            node = adjEdges[i].getnode();
+	        }
+	        if (nodes[i].issolved()){
+	        	adjEdges[i].setsolved();
 	        }
 	    }
-	    return {node, minl}
+	    if (node == 100){
+	    	//System.out.println("NUMBER " + adjEdges.length);
+	    	for (int i = 0; i < adjEdges.length; i++){
+	    		//System.out.println("FROM " + label + adjEdges[i]);
+	    		//System.out.println("LENGTH " + adjEdges[i].getlength());
+	    	}
+	    }
+	    return new double[]{node, minl};
 	}
 
 
