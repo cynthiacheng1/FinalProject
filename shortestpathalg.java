@@ -130,6 +130,7 @@ public class shortestpathalg{
         testedges3[3] = new double[][]{{1,5},{2,4}};
         //System.out.println(testedges);
         shortestpathalg test3 = new shortestpathalg(0,3,testedges3,4);
+        //shortestpathalg test3 = new shortestpathalg(1,3,testedges3,4);
         System.out.println(test3);
     }
 
