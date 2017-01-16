@@ -78,7 +78,7 @@ public class ShortestPathInput extends JFrame implements ActionListener{
 
 
 	public static void main(String[] args){
-		ShortestPathInput g = new ShortestPathInput(7);
+		ShortestPathInput g = new ShortestPathInput(5);
 		gooey.setVisible(true);
 	}
 

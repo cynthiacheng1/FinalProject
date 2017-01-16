@@ -16,27 +16,8 @@ public class InputGraphics extends JPanel{
 	
 
 	public void paintComponent(Graphics g){
-		//Color[] colors = {Color.red, Color.blue, Color.green, Color.yellow, Color.black, Color.pink, Color.gray};
-		
-		/*for (int i = 0; i < numOfNodes; i++){
-			Color culr = colors[i%colors.length];
-			g.setColor(culr);
 
-			int x = (int)Math.random() * (550/numOfNodes) * i;
-			int y = (int)Math.random() * (300);
-
-			while(!checkNewCoord(x, y, i, coordinates)){
-				x = (int)Math.random() * (550/numOfNodes) * i;
-				y = (int)Math.random() * 300;
-			}
-
-			x = coordinates[i][0];
-			y = coordinates[i][1];
-
-			g.fillOval(x,y,50,50);
-
-			System.out.println("Node " + (i+1) + " "+ x+","+ y);
-		}*/
+		g.setColor(Color.BLACK);
 
 		for (int i=0; i <numOfNodes-1; i++){
 			int x1, y1, x2, y2;
@@ -59,28 +40,30 @@ public class InputGraphics extends JPanel{
 				label[j] = distance.charAt(j);
 			}
 			g.drawChars(label, 0, label.length, ((x1 + x2+50)/2), ((y1 + y2+50)/2));
-
-			for(int j = 0; j < coordinates.length; j++){
-				String numba = "j";
-				char[] nuuumba = {numba.charAt(0)};
-				g.setColor(Color.white);
-				g.drawChars(nuuumba, 0, 1, coordinates[j][0]+50, coordinates[j][1]+50);
-
-			}
 		}
 
-		// for (int i=0; i <numOfNodes; i++){
-		// 	int index1 = (int)(Math.random() * coordinates.length);
-		// 	int index2 = (int)(Math.random() * coordinates.length);
-		// 	int x1, y1, x2, y2;
-		// 	x1 = coordinates[index1][0] + 25;
-		// 	y1 = coordinates[index1][1] + 25;
 
-		// 	x2 = coordinates[index2][0] + 25;
-		// 	y2 = coordinates[index2][1] + 25;
+		g.setColor(Color.RED);
 
-		// 	g.drawLine(x1,y1,x2,y2);
-		// }
+		for(int j = 0; j < coordinates.length; j++){
+				String numba = "" + (j+1);
+				char[] nuuumba = {numba.charAt(0)};
+				g.drawChars(nuuumba, 0, 1, coordinates[j][0]+50, coordinates[j][1]+50);
+				System.out.println("yas");
+		}
+
+		for (int i=0; i <numOfNodes; i++){
+			int index1 = (int)(Math.random() * coordinates.length);
+			int index2 = (int)(Math.random() * coordinates.length);
+			int x1, y1, x2, y2;
+			x1 = coordinates[index1][0] + 25;
+			y1 = coordinates[index1][1] + 25;
+
+			x2 = coordinates[index2][0] + 25;
+			y2 = coordinates[index2][1] + 25;
+			g.setColor(Color.BLACK);
+			g.drawLine(x1,y1,x2,y2);
+		}
 	}
 
 	public boolean checkNewCoord(int x, int y, int numFilled, int[][] coords){
