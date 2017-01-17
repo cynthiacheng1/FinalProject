@@ -1,6 +1,8 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.*;
+
 
 public class InputGraphics extends JPanel{
 
@@ -8,6 +10,7 @@ public class InputGraphics extends JPanel{
 	int numOfNodes;
 	//int[][][] distancesAndNodes;
 	//ArrayList[][][] distancesAndNodes;
+	ArrayList<Integer> info;
 
 
 	public InputGraphics(){}
@@ -15,7 +18,6 @@ public class InputGraphics extends JPanel{
 	public InputGraphics(int[][] stuff, int nn){
 		coordinates = stuff;
 		numOfNodes = nn;
-		//distancesAndNodes = new ArrayList[nn][1][2];
 	}
 	
 
@@ -39,6 +41,9 @@ public class InputGraphics extends JPanel{
 
 			//int[] toAdd = {i+1, (int)distanceForm(x1, x2, y1, y2)};
 			//xdistancesAndNodes[i][0] = toAdd;
+			info.add(i);
+			info.add(i+1);
+			info.add((int)distanceForm(x1, x2, y1, y2));
 
 			char[] label = new char[distance.length()];
 
@@ -70,7 +75,14 @@ public class InputGraphics extends JPanel{
 			g.setColor(Color.BLACK);
 			g.drawLine(x1,y1,x2,y2);
 
-
+			int[] firstNodeCoords = {x1-25,y1-25};
+			int[] connectedNodeCoords = {x2-25,y2-25};
+			int firstNode = indexFinder(coordinates, firstNodeCoords);
+			int connectedNode = indexFinder(coordinates, connectedNodeCoords);
+			info.add(firstNode);
+			info.add(connectedNode);
+			info.add((int)distanceForm(x1, x2, y1, y2));
+			System.out.println(printArrayList(info));
 
 			String distance = "" + (int)distanceForm(x1, x2, y1, y2);
 			char[] label = new char[distance.length()];
@@ -98,6 +110,63 @@ public class InputGraphics extends JPanel{
 		return distance;
 	}
 
+	public static int indexFinder(int[][] coordinates, int[] find){
+		//System.out.println(print2D(coordinates));
+		for (int i =0; i < coordinates.length; i++){
+			//System.out.println(printArray(coordinates[i]));
+			//System.out.println(printArray(find));
+			if (compareArrays(coordinates[i],find)){
+				return i;
+			}
+		}
+		return 1000;
+	}
+
+	public static String print2D(int[][] array){
+		String ans = "[";
+		for (int i=0; i < array.length; i++){
+			ans += "[";
+			for (int j=0; j < array[0].length; j++){
+				ans += array[i][j] +",";
+			}
+			ans = ans.substring(0,ans.length()-1) + "]";
+		}
+		return ans + "]";
+	}
+
+	public static String printArray(int[] array){
+		String ans = "[";
+		for (int i=0; i < array.length; i++){
+			ans += array[i] +",";
+		}
+		return ans.substring(0,ans.length()-1)  +"]";
+	}
+
+	public static boolean compareArrays(int[] array1, int[] array2) {
+        boolean b = true;
+        if (array1 != null && array2 != null){
+          if (array1.length != array2.length)
+              b = false;
+          else
+              for (int i = 0; i < array2.length; i++) {
+                  if (array2[i] != array1[i]) {
+                      b = false;    
+                  }                 
+            }
+        }else{
+          b = false;
+        }
+        return b;
+    }
+
+    public static String printArrayList(ArrayList<Integer> data) {
+		String ans = "[ ";
+		for (int i = 0; i < data.size(); i++) {
+			ans = ans + data.get(i) + ", ";
+		}
+		ans = ans.substring(0 ,ans.length() - 2) + "]";
+		return ans;
+	}
 
 	public static void main(String[] args){
 		InputGraphics s = new InputGraphics();
