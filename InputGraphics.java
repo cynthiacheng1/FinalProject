@@ -9,7 +9,7 @@ public class InputGraphics extends JPanel{
 	int[][] coordinates;
 	int numOfNodes;
 	//int[][] groupedInfo;
-	//double[][][] distancesAndNodes;
+	double[][][] distancesAndNodes;
 	ArrayList<Integer> info = new ArrayList<Integer>();
 
 
@@ -105,7 +105,41 @@ public class InputGraphics extends JPanel{
 			}
 			groupedInfo[i/3] = part;
 		}
-		System.out.println(print2D(groupedInfo));
+		//System.out.println(print2D(groupedInfo));
+		groupedInfo = sort(groupedInfo);
+		//System.out.println(print2D(groupedInfo));
+		distancesAndNodes = sortData(groupedInfo);
+
+	}
+
+	public double[][][] sortData(int[][] gI){
+		double[][][] dAN;
+		ArrayList<Integer> counts = new ArrayList<Integer>();
+
+		for(int i = 0; i < numOfNodes; i++){
+			int ctr = 0;
+			for(int[] blah:gI){
+				if(blah[0] == i){
+					ctr += 1;
+				}
+			}
+			counts.add(ctr);
+		}
+
+		dAN = new double[numOfNodes][Collections.max(counts)][2];
+		int ctr = 0;
+		for(int i = 0; i < numOfNodes; i++){
+			while(gI[ctr][0] == i){
+				int threeCounter = 0;
+				double[] toAdd = {gI[ctr][1], gI[ctr][2]};
+				dAN[i][threeCounter] = toAdd;
+				ctr++;
+				threeCounter++;
+			}
+		}
+
+		return dAN;
+
 	}
 
 	public boolean checkNewCoord(int x, int y, int numFilled, int[][] coords){
@@ -181,6 +215,27 @@ public class InputGraphics extends JPanel{
 		}
 		ans = ans.substring(0 ,ans.length() - 2) + "]";
 		return ans;
+	}
+
+	public static int[][] sort(int[][] theArray){   
+
+	    ArrayList<int[]> tempArray = new ArrayList<int[]>();
+	    for(int i = 0; i < 5; i++){
+
+		    for(int[] arr:theArray){
+		    	if(arr[0] == i){
+		    		if(arr[2] != 0){
+		    			tempArray.add(arr);
+		    		}
+		    	}
+
+		    }
+		}
+
+		theArray = tempArray.toArray(new int[5][3]);
+
+		return theArray;
+ 
 	}
 
 

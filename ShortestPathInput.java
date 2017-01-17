@@ -92,7 +92,12 @@ public class ShortestPathInput extends JFrame implements ActionListener{
     }
 
 	public static void main(String[] args){
-		ShortestPathInput g = new ShortestPathInput(5);
+		try{
+			ShortestPathInput g = new ShortestPathInput(Integer.parseInt(args[0]));
+		}
+		catch(IndexOutOfBoundsException e){
+			ShortestPathInput g = new ShortestPathInput(5);
+		}
 		gooey.setVisible(true);
 	}
 
