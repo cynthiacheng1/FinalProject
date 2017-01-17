@@ -10,7 +10,7 @@ public class InputGraphics extends JPanel{
 	int numOfNodes;
 	//int[][][] distancesAndNodes;
 	//ArrayList[][][] distancesAndNodes;
-	ArrayList<Integer> info;
+	ArrayList<Integer> info = new ArrayList<Integer>();
 
 
 	public InputGraphics(){}
@@ -22,8 +22,7 @@ public class InputGraphics extends JPanel{
 	
 
 	public void paintComponent(Graphics g){
-
-		g.setColor(Color.BLACK);
+		System.out.println("enter");
 
 		for (int i=0; i <numOfNodes-1; i++){
 			int x1, y1, x2, y2;
@@ -39,11 +38,13 @@ public class InputGraphics extends JPanel{
 			g.drawLine(x1+25,y1+25,x2+25,y2+25);
 			String distance = "" + (int)distanceForm(x1, x2, y1, y2);
 
-			//int[] toAdd = {i+1, (int)distanceForm(x1, x2, y1, y2)};
-			//xdistancesAndNodes[i][0] = toAdd;
+			//System.out.println(i);
 			info.add(i);
+			//System.out.println(i);
 			info.add(i+1);
 			info.add((int)distanceForm(x1, x2, y1, y2));
+			//System.out.println((int)distanceForm(x1, x2, y1, y2));
+
 
 			char[] label = new char[distance.length()];
 
@@ -52,6 +53,7 @@ public class InputGraphics extends JPanel{
 			}
 			g.drawChars(label, 0, label.length, ((x1 + x2+50)/2), ((y1 + y2+50)/2));
 		}
+		System.out.println("end of first forloop");
 
 
 		g.setColor(Color.RED);
@@ -62,6 +64,7 @@ public class InputGraphics extends JPanel{
 				g.drawChars(nuuumba, 0, 1, coordinates[j][0]+50, coordinates[j][1]+50);
 				//System.out.println("yas");
 		}
+		System.out.println("end of second forloop");
 
 		for (int i=0; i <numOfNodes; i++){
 			int index1 = (int)(Math.random() * coordinates.length);
@@ -69,18 +72,19 @@ public class InputGraphics extends JPanel{
 			int x1, y1, x2, y2;
 			x1 = coordinates[index1][0] + 25;
 			y1 = coordinates[index1][1] + 25;
-
 			x2 = coordinates[index2][0] + 25;
 			y2 = coordinates[index2][1] + 25;
 			g.setColor(Color.BLACK);
 			g.drawLine(x1,y1,x2,y2);
 
-			int[] firstNodeCoords = {x1-25,y1-25};
-			int[] connectedNodeCoords = {x2-25,y2-25};
-			int firstNode = indexFinder(coordinates, firstNodeCoords);
-			int connectedNode = indexFinder(coordinates, connectedNodeCoords);
-			info.add(firstNode);
-			info.add(connectedNode);
+			// int[] firstNodeCoords = {x1-25,y1-25};
+			// int[] connectedNodeCoords = {x2-25,y2-25};
+			// int firstNode = indexFinder(coordinates, firstNodeCoords);
+			// System.out.println()
+			// int connectedNode = indexFinder(coordinates, connectedNodeCoords);
+
+			info.add(index1);
+			info.add(index2);
 			info.add((int)distanceForm(x1, x2, y1, y2));
 			System.out.println(printArrayList(info));
 
@@ -91,6 +95,7 @@ public class InputGraphics extends JPanel{
 			}
 			g.drawChars(label, 0, label.length, ((x1 + x2)/2), ((y1 + y2)/2));
 		}
+		System.out.println("exit");
 	}
 
 	public boolean checkNewCoord(int x, int y, int numFilled, int[][] coords){
