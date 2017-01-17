@@ -47,7 +47,7 @@ public class ShortestPathInput extends JFrame implements ActionListener{
 			coordinates[i][0] = (int)Double.parseDouble(inputCoords[i][0].getText());
 			coordinates[i][1] = (int)Double.parseDouble(inputCoords[i][1].getText());
 		}
-
+		System.out.println(printArray(coordinates));
 		InputGraphics g = new InputGraphics(coordinates, numNodes); 
 		JFrame jf = new JFrame();
 		jf.setTitle("Shortest Path Algorithm");
@@ -56,7 +56,7 @@ public class ShortestPathInput extends JFrame implements ActionListener{
 		jf.add(g); //adding panel ontop of frame
 		jf.setVisible(true);
 
-		GuessPath gp = new GuessPath(numNodes);
+		GuessPath gp = new GuessPath();
 
 		
 	}
@@ -78,6 +78,18 @@ public class ShortestPathInput extends JFrame implements ActionListener{
 		return true;
 	}
 
+
+    public String printArray(int[][] data){
+        String ans = "";
+        int i;
+        for (i = 0; i < data.length; i ++) {
+            for (int j=0; j < data[0].length; j++) {
+                ans += data[i][j] + " ";
+            }
+            ans += "\n";
+        }
+        return ans;
+    }
 
 	public static void main(String[] args){
 		ShortestPathInput g = new ShortestPathInput(5);

@@ -11,6 +11,7 @@ public class ShortestPathNew extends JPanel implements ActionListener, Component
     int firstX, firstY, secondX, secondY;
     int width = 600;
     int height = 400;
+
     ShortestPathNew s;
 
 
@@ -23,14 +24,7 @@ public class ShortestPathNew extends JPanel implements ActionListener, Component
 		//b.setActionCommand("")
 	}
 
-	// public void actionPerformed(ActionEvent e){
-	// 	// firstX = Integer.parseInt(ex1.getText());
-	// 	// secondX = Integer.parseInt(ex2.getText());
-	// 	// firstY = Integer.parseInt(wai1.getText());
-	// 	// secondY = Integer.parseInt(wai2.getText());
 
-
-	// }
 
     public String print(String[] array){
         String ans = "[";
@@ -101,6 +95,14 @@ public class ShortestPathNew extends JPanel implements ActionListener, Component
 			g.drawChars(label, 0, label.length, ((x1 + x2)/2), ((y1 + y2)/2));
 		}
 
+		g.setColor(Color.RED);
+		for(int j = 0; j < positions.length; j++){
+				String numba = "" + (j+1);
+				char[] nuuumba = {numba.charAt(0)};
+				g.drawChars(nuuumba, 0, 1, positions[j][0]+50, positions[j][1]+50);
+				//System.out.println("yas");
+		}
+
 		for (int i=0; i <numOfNodes; i++){
 			int index1 = (int)(Math.random() * positions.length);
 			int index2 = (int)(Math.random() * positions.length);
@@ -111,6 +113,7 @@ public class ShortestPathNew extends JPanel implements ActionListener, Component
 			x2 = positions[index2][0] + 25;
 			y2 = positions[index2][1] + 25;
 
+			g.setColor(Color.BLACK);
 			g.drawLine(x1,y1,x2,y2);
 
 			String distance = "" + (int)distanceForm(x1, x2, y1, y2);
@@ -146,29 +149,17 @@ public class ShortestPathNew extends JPanel implements ActionListener, Component
 
 
 	public static void main(String[] args){
-		int x = 0;
-		// System.out.println("Hello Welcome to the Shortest Path \nFirst Write the number of nodes you will like.");
-		// Scanner inputNodes = new Scanner(System.in);
-		// int numOfNodes = inputNodes.nextInt();
-		// String nodeInfo = "";
-		// for (int i =0; i < numOfNodes; i++){
-		// 	System.out.println("Input specifications for node " + (i+1) +"\nEx. if node 1 was connected to node 2 by length 5 and connected to node 3 by length 2 would input '2,5;3,2 '");
-		// 	Scanner inputInfo = new Scanner(System.in);
-		// 	nodeInfo += inputInfo.nextLine();
-		// }
-		//changeInfo(nodeInfo);
-		x =5;
-		
-		if (x == 5) {
-			ShortestPathNew s = new ShortestPathNew();
-			JFrame jf = new JFrame();
-			jf.setTitle("Shortest Path Algorithm");
-			jf.setSize(600, 400);
-			jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-			jf.add(s); //adding panel ontop of frame
-			jf.setVisible(true);
+		ShortestPathNew s = new ShortestPathNew();
+		JFrame jf = new JFrame();
+		jf.setTitle("Shortest Path Algorithm");
+		jf.setSize(600, 400);
+		jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		jf.add(s); //adding panel ontop of frame
+		jf.setVisible(true);
 
-		}
+		GuessPath gp = new GuessPath();
+
+
 	}
 
 }

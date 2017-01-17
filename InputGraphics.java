@@ -6,12 +6,16 @@ public class InputGraphics extends JPanel{
 
 	int[][] coordinates;
 	int numOfNodes;
+	//int[][][] distancesAndNodes;
+	//ArrayList[][][] distancesAndNodes;
+
 
 	public InputGraphics(){}
 
 	public InputGraphics(int[][] stuff, int nn){
 		coordinates = stuff;
 		numOfNodes = nn;
+		//distancesAndNodes = new ArrayList[nn][1][2];
 	}
 	
 
@@ -31,8 +35,10 @@ public class InputGraphics extends JPanel{
 			g.fillOval(x1, y1, 50, 50);
 			g.fillOval(x2, y2, 50, 50);
 			g.drawLine(x1+25,y1+25,x2+25,y2+25);
-
 			String distance = "" + (int)distanceForm(x1, x2, y1, y2);
+
+			//int[] toAdd = {i+1, (int)distanceForm(x1, x2, y1, y2)};
+			//xdistancesAndNodes[i][0] = toAdd;
 
 			char[] label = new char[distance.length()];
 
@@ -49,7 +55,7 @@ public class InputGraphics extends JPanel{
 				String numba = "" + (j+1);
 				char[] nuuumba = {numba.charAt(0)};
 				g.drawChars(nuuumba, 0, 1, coordinates[j][0]+50, coordinates[j][1]+50);
-				System.out.println("yas");
+				//System.out.println("yas");
 		}
 
 		for (int i=0; i <numOfNodes; i++){
@@ -63,6 +69,15 @@ public class InputGraphics extends JPanel{
 			y2 = coordinates[index2][1] + 25;
 			g.setColor(Color.BLACK);
 			g.drawLine(x1,y1,x2,y2);
+
+
+
+			String distance = "" + (int)distanceForm(x1, x2, y1, y2);
+			char[] label = new char[distance.length()];
+			for(int j = 0; j < distance.length(); j++){
+				label[j] = distance.charAt(j);
+			}
+			g.drawChars(label, 0, label.length, ((x1 + x2)/2), ((y1 + y2)/2));
 		}
 	}
 
