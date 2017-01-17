@@ -8,8 +8,8 @@ public class InputGraphics extends JPanel{
 
 	int[][] coordinates;
 	int numOfNodes;
-	//int[][][] distancesAndNodes;
-	//ArrayList[][][] distancesAndNodes;
+	//int[][] groupedInfo;
+	//double[][][] distancesAndNodes;
 	ArrayList<Integer> info = new ArrayList<Integer>();
 
 
@@ -22,7 +22,7 @@ public class InputGraphics extends JPanel{
 	
 
 	public void paintComponent(Graphics g){
-		System.out.println("enter");
+		//System.out.println("enter");
 
 		for (int i=0; i <numOfNodes-1; i++){
 			int x1, y1, x2, y2;
@@ -53,7 +53,7 @@ public class InputGraphics extends JPanel{
 			}
 			g.drawChars(label, 0, label.length, ((x1 + x2+50)/2), ((y1 + y2+50)/2));
 		}
-		System.out.println("end of first forloop");
+		//System.out.println("end of first forloop");
 
 
 		g.setColor(Color.RED);
@@ -64,7 +64,7 @@ public class InputGraphics extends JPanel{
 				g.drawChars(nuuumba, 0, 1, coordinates[j][0]+50, coordinates[j][1]+50);
 				//System.out.println("yas");
 		}
-		System.out.println("end of second forloop");
+		//System.out.println("end of second forloop");
 
 		for (int i=0; i <numOfNodes; i++){
 			int index1 = (int)(Math.random() * coordinates.length);
@@ -95,7 +95,17 @@ public class InputGraphics extends JPanel{
 			}
 			g.drawChars(label, 0, label.length, ((x1 + x2)/2), ((y1 + y2)/2));
 		}
-		System.out.println("exit");
+		//System.out.println("exit");
+		//double[][][] distancesAndNodes = new double[numOfNodes][][];
+		int[][] groupedInfo = new int[info.size()/3][3];
+		for (int i=0; i < info.size(); i+=3){
+			int[] part = new int[3];
+			for (int j =0; j <3; j++){
+				part[j] = info.get(i+j);
+			}
+			groupedInfo[i/3] = part;
+		}
+		System.out.println(print2D(groupedInfo));
 	}
 
 	public boolean checkNewCoord(int x, int y, int numFilled, int[][] coords){
@@ -172,6 +182,7 @@ public class InputGraphics extends JPanel{
 		ans = ans.substring(0 ,ans.length() - 2) + "]";
 		return ans;
 	}
+
 
 	public static void main(String[] args){
 		InputGraphics s = new InputGraphics();
