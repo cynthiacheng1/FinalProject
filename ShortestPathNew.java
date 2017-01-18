@@ -1,26 +1,23 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import java.util.Scanner;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.Random;
+import java.util.*;
 
 public class ShortestPathNew extends JPanel implements ActionListener, ComponentListener{
 
-    String info;
     int firstX, firstY, secondX, secondY;
     int width = 600;
     int height = 400;
-
+    ArrayList<Integer> info = new ArrayList<Integer>();
     ShortestPathNew s;
+    int numOfNodes;
+    double[][][] distancesAndNodes;
 
 
-	//gui version of sleep method
-	//Timer tm = new Timer(5, this); //this= actionlistener
-	//int x=0, velX=2;
 
-	public ShortestPathNew(){
-		
+	public ShortestPathNew(){	
 		//b.setActionCommand("")
 	}
 
@@ -47,15 +44,10 @@ public class ShortestPathNew extends JPanel implements ActionListener, Component
 
 
 	public void paintComponent(Graphics g){
-		// info = info.substring(0,info.length());
-		// String[] nodes = info.split(" ");
-		// for (int i =0; i <nodes.length; i++){
-		// 	g.setColor(Color.RED);
-		// 	g.fillOval(100*i,100*i,75,75);
-		// }
+
 		s = new ShortestPathNew();
 		Random rand = new Random();
-		int numOfNodes = ThreadLocalRandom.current().nextInt(4, 9 + 1);
+		numOfNodes = ThreadLocalRandom.current().nextInt(4, 9 + 1);
 		System.out.println(numOfNodes);
 		Color[] colors = {Color.red, Color.blue, Color.green, Color.yellow, Color.black, Color.pink, Color.gray};
 		int[][] positions = new int[numOfNodes][2]; 
@@ -86,6 +78,11 @@ public class ShortestPathNew extends JPanel implements ActionListener, Component
 			x2 = positions[i+1][0] + 25;
 			y2 = positions[i+1][1] + 25;
 			g.setColor(Color.black);
+
+			info.add(i);
+			info.add(i+1);
+			info.add((int)distanceForm(x1, x2, y1, y2));
+
 			g.drawLine(x1,y1,x2,y2);
 			String distance = "" + (int)distanceForm(x1, x2, y1, y2);
 			char[] label = new char[distance.length()];
@@ -113,6 +110,10 @@ public class ShortestPathNew extends JPanel implements ActionListener, Component
 			x2 = positions[index2][0] + 25;
 			y2 = positions[index2][1] + 25;
 
+			info.add(index1);
+			info.add(index2);
+			info.add((int)distanceForm(x1, x2, y1, y2));
+
 			g.setColor(Color.BLACK);
 			g.drawLine(x1,y1,x2,y2);
 
@@ -123,7 +124,28 @@ public class ShortestPathNew extends JPanel implements ActionListener, Component
 			}
 			g.drawChars(label, 0, label.length, ((x1 + x2)/2), ((y1 + y2)/2));
 		}
+
+		int[][] groupedInfo = new int[info.size()/3][3];
+		for (int i=0; i < info.size(); i+=3){
+			int[] part = new int[3];
+			for (int j =0; j <3; j++){
+				part[j] = info.get(i+j);
+			}
+			groupedInfo[i/3] = part;
+		}
+		//System.out.println(print2D(groupedInfo));
+		groupedInfo = sort(groupedInfo);
+		//System.out.println(print2D(groupedInfo));
+		distancesAndNodes = makeInto3D(groupedInfo, numPerIndex(groupedInfo, numOfNodes));
 		
+	}
+
+	public double[][][] getInfo(){
+		return distancesAndNodes;
+	}
+
+	public int getNumNodes(){
+		return numOfNodes;
 	}
 
 	public double distanceForm(double x1, double x2, double y1, double y2){
@@ -141,6 +163,54 @@ public class ShortestPathNew extends JPanel implements ActionListener, Component
 			}
 		}
 		return true;
+	}
+
+	public static int[] numPerIndex(int[][] aRAY, int numNodes){
+		//int[] ans = new int[numNodes];
+		int[] ans = new int[numNodes];
+		for (int i =0; i < numNodes; i++){
+			ans[i] = 0;
+		}
+		for (int i =0; i < aRAY.length; i++){
+			int index = aRAY[i][0];
+			ans[index] ++;
+		}
+		return ans;
+
+	}
+
+	public static double[][][] makeInto3D(int[][] nodes, int[] indexes){
+		double[][][] ans = new double[indexes.length][][];
+		int ctr = 0;
+		for (int i =0; i < indexes.length; i++){
+			double[][] temp = new double[indexes[i]][2];
+			for (int j=0; j < indexes[i]; j++){
+				double[] coords = {nodes[ctr][1], nodes[ctr][2]};
+				temp[j] = coords;
+				ctr++;
+ 			}
+ 			ans[i] = temp;
+ 			//System.out.println(print2D(ans[i]));
+		}
+		return ans;
+	}
+
+	public static int[][] sort(int[][] theArray){   
+	    ArrayList<int[]> tempArray = new ArrayList<int[]>();
+	    for(int i = 0; i < 5; i++){
+
+		    for(int[] arr:theArray){
+		    	if(arr[0] == i){
+		    		if(arr[2] != 0){
+		    			tempArray.add(arr);
+		    		}
+		    	}
+
+		    }
+		}
+		theArray = tempArray.toArray(new int[5][3]);
+		return theArray;
+ 
 	}
 
 	public void actionPerformed(ActionEvent e) {

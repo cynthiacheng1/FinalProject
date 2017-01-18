@@ -9,11 +9,11 @@ public class InputGraphics extends JPanel{
 	int[][] coordinates;
 	int numOfNodes;
 	//int[][] groupedInfo;
-	double[][][] distancesAndNodes;
 	ArrayList<Integer> info = new ArrayList<Integer>();
 
 
 	public InputGraphics(){}
+	double[][][] distancesAndNodes;
 
 	public InputGraphics(int[][] stuff, int nn){
 		coordinates = stuff;
@@ -114,6 +114,14 @@ public class InputGraphics extends JPanel{
 
 	}
 
+	public double[][][] getInfo(){
+		return distancesAndNodes;
+	}
+
+	public int getNumNodes(){
+		return numOfNodes;
+	}
+
 
 	public static int[] numPerIndex(int[][] aRAY, int numNodes){
 		//int[] ans = new int[numNodes];
@@ -201,18 +209,6 @@ public class InputGraphics extends JPanel{
 		return distance;
 	}
 
-	public static int indexFinder(int[][] coordinates, int[] find){
-		//System.out.println(print2D(coordinates));
-		for (int i =0; i < coordinates.length; i++){
-			//System.out.println(printArray(coordinates[i]));
-			//System.out.println(printArray(find));
-			if (compareArrays(coordinates[i],find)){
-				return i;
-			}
-		}
-		return 1000;
-	}
-
 	public static String print2D(int[][] array){
 		String ans = "[";
 		for (int i=0; i < array.length; i++){
@@ -233,22 +229,6 @@ public class InputGraphics extends JPanel{
 		return ans.substring(0,ans.length()-1)  +"]";
 	}
 
-	public static boolean compareArrays(int[] array1, int[] array2) {
-        boolean b = true;
-        if (array1 != null && array2 != null){
-          if (array1.length != array2.length)
-              b = false;
-          else
-              for (int i = 0; i < array2.length; i++) {
-                  if (array2[i] != array1[i]) {
-                      b = false;    
-                  }                 
-            }
-        }else{
-          b = false;
-        }
-        return b;
-    }
 
     public static String printArrayList(ArrayList<Integer> data) {
 		String ans = "[ ";

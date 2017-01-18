@@ -41,7 +41,45 @@ public class GuessPath extends JFrame implements ActionListener{
 		gooey.setVisible(true);
 	}
 
+	public static boolean isInteger(String s) {
+        boolean isValidInteger = false;
+        try{
+        	Integer.parseInt(s);
+ 			// s is a valid integer
+        	isValidInteger = true;
+        }
+      	catch (NumberFormatException ex){
+        	// s is not an integer
+        }
+    	return isValidInteger;
+   }
+
+
 	public void actionPerformed(ActionEvent e){
+		String originInput = text1.getText();
+		String endInput = text2.getText();
+		String ans = text3.getText();
+		// if (isInteger(originInput)){
+		// 	System.out.println(Integer.parseInt(originInput));
+		// 	System.out.println(numNodes);
+		// 	//numNodes
+		// 	if ((Integer.parseInt(originInput)< numNodes) && (Integer.parseInt(originInput) >= 0)) {
+		// 		origin = Integer.parseInt(originInput);
+		// 		System.out.println(origin);
+		// 	}
+		// 	else{
+		// 		JOptionPane.showMessageDialog(null,"Please Input a Valid Number","Error",JOptionPane.WARNING_MESSAGE);
+		// 	}
+		// }
+		// else{
+		// 	JOptionPane.showMessageDialog(null,"Please Input a Valid Number","Error",JOptionPane.WARNING_MESSAGE);
+		// }
+
+		origin = Integer.parseInt(originInput);
+		end = Integer.parseInt(endInput);
+		//List<String> list = new ArrayList<String>(Arrays.asList(ans.split(" , ")));
+		//get 3D ARRAY(testedges) AND NUMNODES(6)
+		//shortestpathalg correct = new shortestpathalg(origin,end,testedges,6);
 
 	}
 
