@@ -108,37 +108,79 @@ public class InputGraphics extends JPanel{
 		//System.out.println(print2D(groupedInfo));
 		groupedInfo = sort(groupedInfo);
 		//System.out.println(print2D(groupedInfo));
-		distancesAndNodes = sortData(groupedInfo);
+		distancesAndNodes = makeInto3D(groupedInfo, numPerIndex(groupedInfo, numOfNodes));
+		//numPerIndex(distancesAndNodes)
+		System.out.println(print3D(distancesAndNodes));
 
 	}
 
-	public double[][][] sortData(int[][] gI){
-		double[][][] dAN;
-		ArrayList<Integer> counts = new ArrayList<Integer>();
 
-		for(int i = 0; i < numOfNodes; i++){
-			int ctr = 0;
-			for(int[] blah:gI){
-				if(blah[0] == i){
-					ctr += 1;
-				}
-			}
-			counts.add(ctr);
+	public static int[] numPerIndex(int[][] aRAY, int numNodes){
+		//int[] ans = new int[numNodes];
+		int[] ans = new int[numNodes];
+		for (int i =0; i < numNodes; i++){
+			ans[i] = 0;
 		}
+		for (int i =0; i < aRAY.length; i++){
+			int index = aRAY[i][0];
+			ans[index] ++;
+		}
+		return ans;
 
-		dAN = new double[numOfNodes][Collections.max(counts)][2];
+	}
+
+	public static double[][][] makeInto3D(int[][] nodes, int[] indexes){
+		double[][][] ans = new double[indexes.length][][];
 		int ctr = 0;
-		for(int i = 0; i < numOfNodes; i++){
-			while(gI[ctr][0] == i){
-				int threeCounter = 0;
-				double[] toAdd = {gI[ctr][1], gI[ctr][2]};
-				dAN[i][threeCounter] = toAdd;
+		for (int i =0; i < indexes.length; i++){
+			double[][] temp = new double[indexes[i]][2];
+			for (int j=0; j < indexes[i]; j++){
+				double[] coords = {nodes[ctr][1], nodes[ctr][2]};
+				temp[j] = coords;
 				ctr++;
-				threeCounter++;
-			}
+ 			}
+ 			ans[i] = temp;
+ 			System.out.println(print2D(ans[i]));
 		}
+		return ans;
+	}
 
-		return dAN;
+	public static int[][] sort(int[][] theArray){   
+	    ArrayList<int[]> tempArray = new ArrayList<int[]>();
+	    for(int i = 0; i < 5; i++){
+
+		    for(int[] arr:theArray){
+		    	if(arr[0] == i){
+		    		if(arr[2] != 0){
+		    			tempArray.add(arr);
+		    		}
+		    	}
+
+		    }
+		}
+		theArray = tempArray.toArray(new int[5][3]);
+		return theArray;
+ 
+	}
+
+	public static String print2D(double[][] array){
+		String ans = "[";
+		for (int i=0; i < array.length; i++){
+			ans += "[";
+			for (int j=0; j < array[0].length; j++){
+				ans += array[i][j] +",";
+			}
+			ans = ans.substring(0,ans.length()-1) + "]";
+		}
+		return ans + "]";
+	}
+
+	public static String print3D(double[][][] array){
+		String ans ="[";
+		for (int i =0; i< array.length; i++){
+			ans += print2D(array[i]) +",";
+		}
+		return ans.substring(0,ans.length()) + "]";
 
 	}
 
@@ -217,26 +259,6 @@ public class InputGraphics extends JPanel{
 		return ans;
 	}
 
-	public static int[][] sort(int[][] theArray){   
-
-	    ArrayList<int[]> tempArray = new ArrayList<int[]>();
-	    for(int i = 0; i < 5; i++){
-
-		    for(int[] arr:theArray){
-		    	if(arr[0] == i){
-		    		if(arr[2] != 0){
-		    			tempArray.add(arr);
-		    		}
-		    	}
-
-		    }
-		}
-
-		theArray = tempArray.toArray(new int[5][3]);
-
-		return theArray;
- 
-	}
 
 
 	public static void main(String[] args){

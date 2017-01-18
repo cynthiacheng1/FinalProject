@@ -3,7 +3,6 @@ import java.awt.*;
 import java.awt.event.*;
 
 public class GuessPath extends JFrame implements ActionListener{
-	int numNodes;
 	JTextField[] path;
 	JFrame gooey;
 	Container pane;
@@ -11,21 +10,14 @@ public class GuessPath extends JFrame implements ActionListener{
 	private JTextField text1;
     private JTextField text2;
     private JTextField text3;
+    int origin;
+    int end;
+    double[][][] edgearray;
+    int numNodes;
 
 	public GuessPath(){
-		//numNodes = nn;
-		// path = new JTextField[numNodes];
 
 		pane = this.getContentPane();
-		//pane.setLayout(new FlowLayout());
-
-		// for(int i = 0; i < path.length; i++){
-		// 	path[i] = new JTextField("0");
-		// }
-
-		// for(int i = 0; i < path.length; i++){
-		// 	pane.add(path[i]);
-		// }
 		text1 = new JTextField();
         text2 = new JTextField();
         text3 = new JTextField();
