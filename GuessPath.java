@@ -161,7 +161,7 @@ public class GuessPath extends JFrame implements ActionListener{
 		Node[] solved = correct.solver();
 		int[] labels = new int[solved.length];
 		for(int i = 0; i < solved.length;i++){
-			labels[i] = Integer.parseInt(solved[i].getlabel());
+			labels[i] = Integer.parseInt(solved[i].getlabel()) - 1;
 		}
 		System.out.println(printArray(labels));
 
