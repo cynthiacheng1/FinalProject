@@ -40,7 +40,7 @@ public class Node{
 		//add case for when there are no adjEdges
 		if (!issolved()){return new double[] {-1, 0};}
 		double minl = Double.POSITIVE_INFINITY;
-	    double node = 100;
+	    double node = 710;
 	    for (int i = 0; i < adjEdges.length; i++){
 	        if ((minl > adjEdges[i].getlength()) && !(nodes[adjEdges[i].getnode()].issolved())){
 	            minl = adjEdges[i].getlength();
@@ -50,7 +50,7 @@ public class Node{
 	        	adjEdges[i].setsolved();
 	        }
 	    }
-	    if (node == 100){
+	    if (node == 710){
 	    	//System.out.println("NUMBER " + adjEdges.length);
 	    	for (int i = 0; i < adjEdges.length; i++){
 	    		//System.out.println("FROM " + label + adjEdges[i]);
