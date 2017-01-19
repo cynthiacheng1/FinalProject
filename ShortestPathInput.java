@@ -1,6 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.io.*;
 
 public class ShortestPathInput extends JFrame implements ActionListener{
 	private JTextField[][] inputCoords;
@@ -54,11 +55,7 @@ public class ShortestPathInput extends JFrame implements ActionListener{
 		jf.setSize(600, 400);
 		jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		jf.add(g); //adding panel ontop of frame
-		jf.setVisible(true);
-
-		
-
-		
+		jf.setVisible(true);	
 	}
 
 	public double distanceForm(double x1, double x2, double y1, double y2){
@@ -92,11 +89,16 @@ public class ShortestPathInput extends JFrame implements ActionListener{
     }
 
 	public static void main(String[] args){
-		try{
-			ShortestPathInput g = new ShortestPathInput(Integer.parseInt(args[0]));
+		if (args[0].toUpperCase().equals("RANDOM")){
+			ShortestPathNew a = new ShortestPathNew();
 		}
-		catch(IndexOutOfBoundsException e){
-			ShortestPathInput g = new ShortestPathInput(5);
+		else{
+			try{
+				ShortestPathInput g = new ShortestPathInput(Integer.parseInt(args[0]));
+			}
+			catch(IndexOutOfBoundsException e){
+				ShortestPathInput g = new ShortestPathInput(5);
+			}
 		}
 		gooey.setVisible(true);
 	}

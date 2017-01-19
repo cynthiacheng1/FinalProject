@@ -49,7 +49,7 @@ public class ShortestPathNew extends JPanel implements ActionListener, Component
 
 		s = new ShortestPathNew();
 		Random rand = new Random();
-		numOfNodes = ThreadLocalRandom.current().nextInt(4, 9 + 1);
+		numOfNodes = ThreadLocalRandom.current().nextInt(4, 7 + 1);
 		System.out.println(numOfNodes);
 		Color[] colors = {Color.red, Color.blue, Color.green, Color.yellow, Color.black, Color.pink, Color.gray};
 		int[][] positions = new int[numOfNodes][2]; 
@@ -84,6 +84,9 @@ public class ShortestPathNew extends JPanel implements ActionListener, Component
 			info.add(i);
 			info.add(i+1);
 			info.add((int)distanceForm(x1, x2, y1, y2));
+			info.add(i+1);
+			info.add(i);
+			info.add((int)distanceForm(x1, x2, y1, y2));
 
 			g.drawLine(x1,y1,x2,y2);
 			String distance = "" + (int)distanceForm(x1, x2, y1, y2);
@@ -115,6 +118,9 @@ public class ShortestPathNew extends JPanel implements ActionListener, Component
 			info.add(index1);
 			info.add(index2);
 			info.add((int)distanceForm(x1, x2, y1, y2));
+			info.add(index2);
+			info.add(index1);
+			info.add((int)distanceForm(x1, x2, y1, y2));
 
 			g.setColor(Color.BLACK);
 			g.drawLine(x1,y1,x2,y2);
@@ -139,8 +145,9 @@ public class ShortestPathNew extends JPanel implements ActionListener, Component
 		groupedInfo = sort(groupedInfo);
 		//System.out.println(print2D(groupedInfo));
 		distancesAndNodes = makeInto3D(groupedInfo, numPerIndex(groupedInfo, numOfNodes));
-		disAnNo = distancesAndNodes;
-		nON = numOfNodes;
+		System.out.println(print3D(distancesAndNodes));
+
+		GuessPath gp = new GuessPath(distancesAndNodes, numOfNodes);
 		
 	}
 
@@ -217,6 +224,27 @@ public class ShortestPathNew extends JPanel implements ActionListener, Component
  
 	}
 
+	public static String print2D(double[][] array){
+		String ans = "[";
+		for (int i=0; i < array.length; i++){
+			ans += "[";
+			for (int j=0; j < array[0].length; j++){
+				ans += array[i][j] +",";
+			}
+			ans = ans.substring(0,ans.length()-1) + "]";
+		}
+		return ans + "]";
+	}
+
+	public static String print3D(double[][][] array){
+		String ans ="[";
+		for (int i =0; i< array.length; i++){
+			ans += print2D(array[i]) +",";
+		}
+		return ans.substring(0,ans.length()) + "]";
+
+	}
+
 	public void actionPerformed(ActionEvent e) {
 
 	}
@@ -230,11 +258,6 @@ public class ShortestPathNew extends JPanel implements ActionListener, Component
 		jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		jf.add(s); //adding panel ontop of frame
 		jf.setVisible(true);
-
-		GuessPath gp = new GuessPath(disAnNo, nON);
-
-
-
 	}
 
 }
