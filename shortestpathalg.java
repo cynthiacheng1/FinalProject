@@ -123,14 +123,14 @@ public class shortestpathalg{
         System.out.println(test2);
         //TEST 3: DOESNT WORK BECAUSE TE3[0] IS AN ISSUE
         double[][][]testedges3 = new double[5][][];
-        testedges3[0] = new double[][]{{}};
+        testedges3[0] = new double[][]{{4,20}};
         testedges3[1] = new double[][]{{0,2},{2,2}};
         testedges3[2] = new double[][]{{0,7},{1,3}};
         testedges3[3] = new double[][]{{1,8},{2,1},{4,5}};
         testedges3[4] = new double[][]{{1,5},{3,4}};
         //System.out.println(testedges);
-        //shortestpathalg test3 = new shortestpathalg(0,4,testedges3,5);
-        //System.out.println(test3);
+        shortestpathalg test3 = new shortestpathalg(0,4,testedges3,5);
+        System.out.println(test3);
     }
 
 }
