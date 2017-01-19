@@ -40,8 +40,10 @@ public class InputGraphics extends JPanel{
 
 			//System.out.println(i);
 			info.add(i);
-			//System.out.println(i);
 			info.add(i+1);
+			info.add((int)distanceForm(x1, x2, y1, y2));
+			info.add(i+1);
+			info.add(i);
 			info.add((int)distanceForm(x1, x2, y1, y2));
 			//System.out.println((int)distanceForm(x1, x2, y1, y2));
 
@@ -86,6 +88,9 @@ public class InputGraphics extends JPanel{
 			info.add(index1);
 			info.add(index2);
 			info.add((int)distanceForm(x1, x2, y1, y2));
+			info.add(index2);
+			info.add(index1);
+			info.add((int)distanceForm(x1, x2, y1, y2));
 			System.out.println(printArrayList(info));
 
 			String distance = "" + (int)distanceForm(x1, x2, y1, y2);
@@ -107,10 +112,11 @@ public class InputGraphics extends JPanel{
 		}
 		//System.out.println(print2D(groupedInfo));
 		groupedInfo = sort(groupedInfo);
+		System.out.println("didit");
 		//System.out.println(print2D(groupedInfo));
 		distancesAndNodes = makeInto3D(groupedInfo, numPerIndex(groupedInfo, numOfNodes));
 		//numPerIndex(distancesAndNodes)
-		System.out.println(print3D(distancesAndNodes));
+		GuessPath gp = new GuessPath(distancesAndNodes, numOfNodes);
 
 	}
 

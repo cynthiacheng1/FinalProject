@@ -56,7 +56,7 @@ public class ShortestPathInput extends JFrame implements ActionListener{
 		jf.add(g); //adding panel ontop of frame
 		jf.setVisible(true);
 
-		GuessPath gp = new GuessPath();
+		
 
 		
 	}

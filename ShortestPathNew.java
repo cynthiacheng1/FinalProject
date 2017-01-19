@@ -14,6 +14,8 @@ public class ShortestPathNew extends JPanel implements ActionListener, Component
     ShortestPathNew s;
     int numOfNodes;
     double[][][] distancesAndNodes;
+    static double[][][] disAnNo;
+    static int nON;
 
 
 
@@ -137,6 +139,8 @@ public class ShortestPathNew extends JPanel implements ActionListener, Component
 		groupedInfo = sort(groupedInfo);
 		//System.out.println(print2D(groupedInfo));
 		distancesAndNodes = makeInto3D(groupedInfo, numPerIndex(groupedInfo, numOfNodes));
+		disAnNo = distancesAndNodes;
+		nON = numOfNodes;
 		
 	}
 
@@ -227,7 +231,8 @@ public class ShortestPathNew extends JPanel implements ActionListener, Component
 		jf.add(s); //adding panel ontop of frame
 		jf.setVisible(true);
 
-		GuessPath gp = new GuessPath();
+		GuessPath gp = new GuessPath(disAnNo, nON);
+
 
 
 	}
