@@ -131,6 +131,17 @@ public class shortestpathalg{
         //System.out.println(testedges);
         shortestpathalg test3 = new shortestpathalg(0,4,testedges3,5);
         System.out.println(test3);
+        //TEST4:
+        double[][][]testedges4 = new double[5][][];
+        testedges4[0] = new double[][]{{1.0,244.0},{3.0,364.0},{2.0,198.0},{1.0,244.0}};
+        testedges4[1] = new double[][]{{0.0,244.0},{2.0,298.0},{4.0,196.0},{0.0,244.0}};
+        testedges4[2] = new double[][]{{1.0,298.0},{3.0,225.0},{0.0,198.0}};
+        testedges4[3] = new double[][]{{2.0,225.0},{4.0,111.0},{0.0,364.0}};
+        testedges4[4] = new double[][]{{3.0,111.0},{1.0,196.0}};
+        //System.out.println(testedges);
+        shortestpathalg test4 = new shortestpathalg(4,1,testedges4,5);
+        System.out.println(test4);
+
     }
 
 }
