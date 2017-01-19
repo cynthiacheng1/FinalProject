@@ -156,14 +156,17 @@ public class GuessPath extends JFrame implements ActionListener{
 
 		origin = Integer.parseInt(originInput) -1;
 		end = Integer.parseInt(endInput)-1;
-		System.out.println(print3D(edgearray));
 		shortestpathalg correct = new shortestpathalg(origin,end,edgearray,numNodes);
+		System.out.println(origin);
+		System.out.println(end);
+		System.out.println(print3D(edgearray));
+		System.out.println(numNodes);
 		Node[] solved = correct.solver();
 		int[] labels = new int[solved.length];
 		for(int i = 0; i < solved.length;i++){
 			labels[i] = Integer.parseInt(solved[i].getlabel()) - 1;
 		}
-		System.out.println(printArray(labels));
+		System.out.println("correct answer: " + printArray(labels));
 
 
 		if (compareArrays(labels,userInput)){
