@@ -89,17 +89,17 @@ public class ShortestPathInput extends JFrame implements ActionListener{
     }
 
 	public static void main(String[] args){
-		if (args[0].toUpperCase().equals("RANDOM")){
-			ShortestPathNew a = new ShortestPathNew();
-		}
-		else{
+		// if (args[0].toUpperCase().equals("RANDOM")){
+		// 	ShortestPathNew a = new ShortestPathNew();
+		// }
+		// else{
 			try{
 				ShortestPathInput g = new ShortestPathInput(Integer.parseInt(args[0]));
 			}
 			catch(IndexOutOfBoundsException e){
 				ShortestPathInput g = new ShortestPathInput(5);
 			}
-		}
+		// }
 		gooey.setVisible(true);
 	}
 
