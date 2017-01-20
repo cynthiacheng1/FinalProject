@@ -12,7 +12,7 @@ public class ShortestPathInput extends JFrame implements ActionListener{
 
 	public ShortestPathInput(int nn){
 		numNodes = nn;
-		System.out.println(numNodes);
+		//System.out.println(numNodes);
 
 		pane = this.getContentPane();
 		pane.setLayout(new GridLayout(0,2));
@@ -29,7 +29,7 @@ public class ShortestPathInput extends JFrame implements ActionListener{
 		for(int i = 0; i < inputCoords.length; i++){
 			pane.add(inputCoords[i][0]);
 			pane.add(inputCoords[i][1]);
-			System.out.println("Success!");
+			//System.out.println("Success!");
 		}
 
 		JButton b = new JButton("Enter your coordinates!");
@@ -48,7 +48,7 @@ public class ShortestPathInput extends JFrame implements ActionListener{
 			coordinates[i][0] = (int)Double.parseDouble(inputCoords[i][0].getText());
 			coordinates[i][1] = (int)Double.parseDouble(inputCoords[i][1].getText());
 		}
-		System.out.println(printArray(coordinates));
+		//System.out.println(printArray(coordinates));
 		InputGraphics g = new InputGraphics(coordinates, numNodes); 
 		JFrame jf = new JFrame();
 		jf.setTitle("Shortest Path Algorithm");

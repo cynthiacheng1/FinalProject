@@ -135,8 +135,10 @@ public class GuessPath extends JFrame implements ActionListener{
 			}
 		}
 		Integer[] userInput = new Integer[answerz.size()];
+
 		answerz.toArray(userInput);
-		System.out.println(printArray(userInput));
+
+		//System.out.println(printArray(userInput));
 
 		// if (isInteger(originInput)){
 		// 	System.out.println(Integer.parseInt(originInput));
@@ -153,19 +155,21 @@ public class GuessPath extends JFrame implements ActionListener{
 		// else{
 		// 	JOptionPane.showMessageDialog(null,"Please Input a Valid Number","Error",JOptionPane.WARNING_MESSAGE);
 		// }
-
+	
 		origin = Integer.parseInt(originInput) -1;
 		end = Integer.parseInt(endInput)-1;
 		shortestpathalg correct = new shortestpathalg(origin,end,edgearray,numNodes);
-		System.out.println(origin);
-		System.out.println(end);
-		System.out.println(print3D(edgearray));
-		System.out.println(numNodes);
+		//System.out.println(origin);
+		//System.out.println(end);
+		//System.out.println(print3D(edgearray));
+		//System.out.println(numNodes);
 		Node[] solved = correct.solver();
+		System.out.println(solved.length);	
 		int[] labels = new int[solved.length];
 		for(int i = 0; i < solved.length;i++){
-			labels[i] = Integer.parseInt(solved[i].getlabel()) - 1;
+			labels[i] = Integer.parseInt(solved[i].getlabel())+1;
 		}
+		System.out.println("user input: " + printArray(userInput));
 		System.out.println("correct answer: " + printArray(labels));
 
 
@@ -175,9 +179,6 @@ public class GuessPath extends JFrame implements ActionListener{
 		else{
 			System.out.println("FALSE");
 		}
-
-		//List<String> list = new ArrayList<String>(Arrays.asList(ans.split(" , ")));
-		//List<String> items = Arrays.asList(ans.split("\\s*,\\s*"));
 
 	}
 

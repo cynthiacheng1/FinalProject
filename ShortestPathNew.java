@@ -50,7 +50,7 @@ public class ShortestPathNew extends JPanel implements ActionListener, Component
 		s = new ShortestPathNew();
 		Random rand = new Random();
 		numOfNodes = ThreadLocalRandom.current().nextInt(4, 7 + 1);
-		System.out.println(numOfNodes);
+		//System.out.println(numOfNodes);
 		Color[] colors = {Color.red, Color.blue, Color.green, Color.yellow, Color.black, Color.pink, Color.gray};
 		int[][] positions = new int[numOfNodes][2]; 
 
@@ -69,7 +69,7 @@ public class ShortestPathNew extends JPanel implements ActionListener, Component
 			positions[i][1] = y;
 			g.fillOval(x,y,50,50);
 
-			System.out.println("Node " + (i+1) + " "+ x+","+ y);
+			//System.out.println("Node " + (i+1) + " "+ x+","+ y);
 		}
 
 		for (int i=0; i <numOfNodes-1; i++){
@@ -143,21 +143,34 @@ public class ShortestPathNew extends JPanel implements ActionListener, Component
 		}
 		//System.out.println(print2D(groupedInfo));
 		groupedInfo = sort(groupedInfo);
+		groupedInfo = deleteDuplicates(groupedInfo);
 		//System.out.println(print2D(groupedInfo));
 		distancesAndNodes = makeInto3D(groupedInfo, numPerIndex(groupedInfo, numOfNodes));
-		System.out.println(print3D(distancesAndNodes));
+		//System.out.println(print3D(distancesAndNodes));
 
 		GuessPath gp = new GuessPath(distancesAndNodes, numOfNodes);
 		
 	}
 
-	public double[][][] getInfo(){
-		return distancesAndNodes;
-	}
 
-	public int getNumNodes(){
-		return numOfNodes;
+    public int[][] deleteDuplicates(int[][] arrayer) {
+	int[][] unique = new int[arrayer.length][3];
+	int counter = 0;
+	for (int i = 0; i < arrayer.length; i++) {
+	    boolean add = true;
+	    for (int j = 0; j < counter; j++) {
+		if (Arrays.equals(unique[j], arrayer[i])) {
+		    add = false;
+		}
+	    }
+	    if (add) {
+		unique[counter] = arrayer[i];
+		counter++;
+	    }
 	}
+	return Arrays.copyOfRange(unique, 0, counter);
+    }
+
 
 	public double distanceForm(double x1, double x2, double y1, double y2){
 		double distance = Math.sqrt((x1-x2)*(x1-x2) + (y1-y2)*(y1-y2));

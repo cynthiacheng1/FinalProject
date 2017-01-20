@@ -15,8 +15,8 @@ public class shortestpathalg{
 
     public shortestpathalg(int a, int b, double[][][] e, int n){
         nodes = new Node[n];
-        System.out.println("origin "+a);
-        System.out.println("end "+b);
+        //System.out.println("origin "+a);
+        //System.out.println("end "+b);
         for (int i = 0; i < n; i++){
             nodes[i] = new Node(Integer.toString(i), e[i]);
             if (i == a){
@@ -49,7 +49,7 @@ public class shortestpathalg{
         }
         fin += finale[finale.length-1] + "]";
         fin = "PATH: " + fin + " DISTANCE: " + distance;
-        System.out.println(fin);
+        //System.out.println(fin);
     }
 
     public static double[] findmin(double[] arrayy){
@@ -92,7 +92,7 @@ public class shortestpathalg{
         //System.out.println("NODE FROM" + close[1]);
         int bestnode = (int)closestnodes[(int)close[1]];
         if (bestnode == -1){
-            System.out.println("LOLFUCK");
+            //System.out.println("LOLFUCK");
             return false;
         }
         //System.out.println("HELLO");
@@ -106,7 +106,7 @@ public class shortestpathalg{
         List<Node> temp = new ArrayList<Node>();
         temp = solved.get((int)close[1]).getSP();
         temp = cloner(temp);
-        System.out.println(solved.get((int)close[1]).getlabel());
+        //System.out.println(solved.get((int)close[1]).getlabel());
         //System.out.println(temp);
         temp.add(nodes[bestnode]);
         //System.out.println(temp);
@@ -156,7 +156,7 @@ public class shortestpathalg{
         testedges0[4] = new double[][]{{3,420},{1,236}};
         //System.out.println(testedges);
         shortestpathalg test0 = new shortestpathalg(3,0,testedges0,5);
-        System.out.println(test0);
+        //System.out.println(test0);
 
         double[][][]testedges = new double[6][][];
         testedges[0] = new double[][]{{1,5},{3,2},{4,15}};
@@ -168,7 +168,7 @@ public class shortestpathalg{
         //System.out.println(testedges);
         shortestpathalg test1 = new shortestpathalg(1,5,testedges,6);
 
-        System.out.println(test1);
+        //System.out.println(test1);
         //TEST 2
         double[][][]testedges2 = new double[5][][];
         testedges2[0] = new double[][]{{1,2},{2,8},{3,5}};
@@ -178,7 +178,7 @@ public class shortestpathalg{
         testedges2[4] = new double[][]{{2,3},{3,4}};
         //System.out.println(testedges);
         shortestpathalg test2 = new shortestpathalg(0,4,testedges2,5);
-        System.out.println(test2);
+        //System.out.println(test2);
         //TEST 3: DOESNT WORK BECAUSE TE3[0] IS AN ISSUE
 
         double[][][]testedges3 = new double[4][][];
@@ -190,7 +190,7 @@ public class shortestpathalg{
         //System.out.println(testedges);
         shortestpathalg test3 = new shortestpathalg(0,3,testedges3,4);
         //shortestpathalg test3 = new shortestpathalg(1,3,testedges3,4);
-        System.out.println(test3);
+        //System.out.println(test3);
 
 
         double[][][]testedges4 = new double[5][][];

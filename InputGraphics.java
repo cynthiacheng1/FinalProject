@@ -92,7 +92,7 @@ public class InputGraphics extends JPanel{
 			info.add(index2);
 			info.add(index1);
 			info.add((int)distanceForm(x1, x2, y1, y2));
-			System.out.println(printArrayList(info));
+			//System.out.println(printArrayList(info));
 
 			String distance = "" + (int)distanceForm(x1, x2, y1, y2);
 			char[] label = new char[distance.length()];
@@ -114,7 +114,7 @@ public class InputGraphics extends JPanel{
 		//System.out.println(print2D(groupedInfo));
 		groupedInfo = sort(groupedInfo);
 		groupedInfo = deleteDuplicates(groupedInfo);
-		System.out.println(print2D(groupedInfo));
+		//System.out.println(print2D(groupedInfo));
 		distancesAndNodes = makeInto3D(groupedInfo, numPerIndex(groupedInfo, numOfNodes));
 		//numPerIndex(distancesAndNodes)
 		GuessPath gp = new GuessPath(distancesAndNodes, numOfNodes);
@@ -165,16 +165,11 @@ public class InputGraphics extends JPanel{
 				ctr++;
  			}
  			ans[i] = temp;
- 			System.out.println(print2D(ans[i]));
+ 			//System.out.println(print2D(ans[i]));
 		}
 		return ans;
 	}
 
-	// public static int[][] deleteDuplicates(int[][] array){
-	// 	ArrayList[][] unique = new ArrayList[][];
-	// 	for 
-
-	// }
 
 	public static int[][] sort(int[][] theArray){   
 	    ArrayList<int[]> tempArray = new ArrayList<int[]>();
@@ -245,6 +240,13 @@ public class InputGraphics extends JPanel{
 	}
 
 	public static String printArray(int[] array){
+		String ans = "[";
+		for (int i=0; i < array.length; i++){
+			ans += array[i] +",";
+		}
+		return ans.substring(0,ans.length()-1)  +"]";
+	}
+	public static String printArray(Integer[] array){
 		String ans = "[";
 		for (int i=0; i < array.length; i++){
 			ans += array[i] +",";

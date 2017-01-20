@@ -74,7 +74,7 @@ public class Node{
 	    	return new double[]{Double.parseDouble(label),Double.POSITIVE_INFINITY};
 
 	    }
-	    System.out.println("*" + node);
+	    //System.out.println("*" + node);
 	    return new double[]{node, minl, Double.parseDouble(label)};
 	}
 
