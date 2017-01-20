@@ -2,6 +2,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.*;
+import java.util.Arrays;
 
 
 public class InputGraphics extends JPanel{
@@ -112,21 +113,31 @@ public class InputGraphics extends JPanel{
 		}
 		//System.out.println(print2D(groupedInfo));
 		groupedInfo = sort(groupedInfo);
-		System.out.println("didit");
-		//System.out.println(print2D(groupedInfo));
+		groupedInfo = deleteDuplicates(groupedInfo);
+		System.out.println(print2D(groupedInfo));
 		distancesAndNodes = makeInto3D(groupedInfo, numPerIndex(groupedInfo, numOfNodes));
 		//numPerIndex(distancesAndNodes)
 		GuessPath gp = new GuessPath(distancesAndNodes, numOfNodes);
 
 	}
 
-	public double[][][] getInfo(){
-		return distancesAndNodes;
+    public int[][] deleteDuplicates(int[][] arrayer) {
+	int[][] unique = new int[arrayer.length][3];
+	int counter = 0;
+	for (int i = 0; i < arrayer.length; i++) {
+	    boolean add = true;
+	    for (int j = 0; j < counter; j++) {
+		if (Arrays.equals(unique[j], arrayer[i])) {
+		    add = false;
+		}
+	    }
+	    if (add) {
+		unique[counter] = arrayer[i];
+		counter++;
+	    }
 	}
-
-	public int getNumNodes(){
-		return numOfNodes;
-	}
+	return Arrays.copyOfRange(unique, 0, counter);
+    }
 
 
 	public static int[] numPerIndex(int[][] aRAY, int numNodes){
@@ -158,6 +169,12 @@ public class InputGraphics extends JPanel{
 		}
 		return ans;
 	}
+
+	// public static int[][] deleteDuplicates(int[][] array){
+	// 	ArrayList[][] unique = new ArrayList[][];
+	// 	for 
+
+	// }
 
 	public static int[][] sort(int[][] theArray){   
 	    ArrayList<int[]> tempArray = new ArrayList<int[]>();
