@@ -54,23 +54,55 @@ public class shortestpathalg{
         return new double[]{minA, index};
     }
 
+    public static List<Node> cloner(List<Node> clonedd){
+        List<Node> fin = new ArrayList<Node>();
+        for (int i = 0; i < clonedd.size(); i++){
+            fin.add(clonedd.get(i));
+        }
+        return fin;
+    }
+
     public boolean findnextsolved(){                                 
         int[]closestnodes = new int[solved.size()];
         double[]nodesdist = new double[solved.size()];
+        int test = 0;
         for (int i = 0; i < solved.size(); i++){
             //System.out.println("HELLOO");
             double[]close = solved.get(i).findclosestunsolved(nodes);
-            //System.out.println(close[0]);
-            if ((int)close[0] == solved.get(i).getlabel()){return true;}
+            //System.out.println("NODE: " + close[0]);
+            //System.out.println("MINL" + close[1]);
+            if ((int)close[0] == Double.parseDouble(solved.get(i).getlabel())){
+                test ++;
+            }
             closestnodes[i] = (int)close[0];
             nodesdist[i] = close[1];
         }
+        if (test == solved.size()){return true;}
         double[]close = findmin(nodesdist);
+        //System.out.println("NODE FROM" + close[1]);
         int bestnode = (int)closestnodes[(int)close[1]];
+        if (bestnode == -1){
+            System.out.println("LOLFUCK");
+            return false;
+        }
+        //System.out.println("HELLO");
+        if (nodes[bestnode].issolved()){return false;}
         double bestdist = nodesdist[(int)close[1]];
         solved.add(nodes[bestnode]);
         nodes[bestnode].makesolved();
-        distance += bestdist;
+        //distance += bestdist;
+        nodes[bestnode].setSPD((solved.get((int)close[1]).getSPD()) + bestdist);
+        //System.out.println(solved.get((int)close[1]).getSP());
+        List<Node> temp = new ArrayList<Node>();
+        temp = solved.get((int)close[1]).getSP();
+        temp = cloner(temp);
+        //System.out.println((int)close[1]);
+        //System.out.println(temp);
+        temp.add(nodes[bestnode]);
+        //System.out.println(temp);
+        //System.out.println(bestnode);
+        nodes[bestnode].setSP(temp);
+        //System.out.println(nodes[bestnode].getSP());
         //System.out.println("CHEEEEEECK " + end.issolved());
         //System.out.println("Solved: " + nodes[bestnode]);
         if (nodes[bestnode] == end){
@@ -81,12 +113,16 @@ public class shortestpathalg{
 
     public Node[] solver(){
         solved.add(origin);
+        List<Node> temp = new ArrayList<Node>();
+        temp.add(origin);
+        nodes[Integer.parseInt(origin.getlabel())].setSP(temp);
         boolean done = false;
         while (!done){
             done = findnextsolved();
         }
-        Node[] fin = new Node[solved.size()];
-        fin = solved.toArray(fin);
+        Node[] fin = new Node[end.getSP().size()];
+        fin = end.getSP().toArray(fin);
+        distance = fin[fin.length-1].getSPD();
         return fin;
     }
 
@@ -166,6 +202,7 @@ public class shortestpathalg{
         //System.out.println(testedges);
         //shortestpathalg test3 = new shortestpathalg(0,4,testedges3,5);
         //System.out.println(test3);
+
     }
 
 }

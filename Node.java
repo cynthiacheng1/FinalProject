@@ -8,7 +8,7 @@ public class Node{
 
 	public Node(String name, double[][] adjE){
 		label = name;
-		spdist = Double.POSITIVE_INFINITY;
+		spdist = 0;
 		adjEdges = new Edge[adjE.length];
 		for (int i = 0; i < adjE.length; i++){
 			adjEdges[i] = new Edge((int)adjE[i][0], adjE[i][1]);
@@ -32,8 +32,16 @@ public class Node{
 		spath = sp;
 	}
 
+	public List<Node> getSP(){
+		return spath;
+	}
+
 	public void setSPD(double spd){
 		spdist = spd;
+	}
+
+	public double getSPD(){
+		return spdist;
 	}
 
 	public double[] findclosestunsolved(Node[] nodes){
@@ -42,7 +50,7 @@ public class Node{
 		double minl = Double.POSITIVE_INFINITY;
 	    double node = 100;
 	    for (int i = 0; i < adjEdges.length; i++){
-	        if ((minl > adjEdges[i].getlength()) && !(nodes[adjEdges[i].getnode()].issolved())){
+	        if ((minl > adjEdges[i].getlength()+spdist) && !(nodes[adjEdges[i].getnode()].issolved())){
 	            minl = adjEdges[i].getlength();
 	            node = adjEdges[i].getnode();
 	        }
@@ -55,10 +63,11 @@ public class Node{
 	    	for (int i = 0; i < adjEdges.length; i++){
 	    		//System.out.println("FROM " + label + adjEdges[i]);
 	    		//System.out.println("LENGTH " + adjEdges[i].getlength());
-	    		return new double[]{Double.parseDouble(label),800};
 	    	}
+	    	return new double[]{Double.parseDouble(label),Double.POSITIVE_INFINITY};
+
 	    }
-	    return new double[]{node, minl};
+	    return new double[]{node, minl+spdist, Double.parseDouble(label)};
 	}
 
 
