@@ -15,6 +15,8 @@ public class shortestpathalg{
 
     public shortestpathalg(int a, int b, double[][][] e, int n){
         nodes = new Node[n];
+        System.out.println("origin "+a);
+        System.out.println("end "+b);
         for (int i = 0; i < n; i++){
             nodes[i] = new Node(Integer.toString(i), e[i]);
             if (i == a){
@@ -40,6 +42,14 @@ public class shortestpathalg{
         }*/
         solved = new ArrayList<Node>();
         finale = solver();
+        //if (finale.length == 0){return "[]";}
+        String fin = "[";
+        for (int i = 0; i < finale.length-1; i++){
+            fin += finale[i].getlabel() + ", ";
+        }
+        fin += finale[finale.length-1] + "]";
+        fin = "PATH: " + fin + " DISTANCE: " + distance;
+        System.out.println(fin);
     }
 
     public static double[] findmin(double[] arrayy){
@@ -91,12 +101,12 @@ public class shortestpathalg{
         solved.add(nodes[bestnode]);
         nodes[bestnode].makesolved();
         //distance += bestdist;
-        nodes[bestnode].setSPD((solved.get((int)close[1]).getSPD()) + bestdist);
+        nodes[bestnode].setSPD(bestdist);
         //System.out.println(solved.get((int)close[1]).getSP());
         List<Node> temp = new ArrayList<Node>();
         temp = solved.get((int)close[1]).getSP();
         temp = cloner(temp);
-        //System.out.println((int)close[1]);
+        System.out.println(solved.get((int)close[1]).getlabel());
         //System.out.println(temp);
         temp.add(nodes[bestnode]);
         //System.out.println(temp);
@@ -145,7 +155,7 @@ public class shortestpathalg{
         testedges0[3] = new double[][]{{2,316},{4,420}};
         testedges0[4] = new double[][]{{3,420},{1,236}};
         //System.out.println(testedges);
-        shortestpathalg test0 = new shortestpathalg(1,4,testedges0,5);
+        shortestpathalg test0 = new shortestpathalg(3,0,testedges0,5);
         System.out.println(test0);
 
         double[][][]testedges = new double[6][][];
